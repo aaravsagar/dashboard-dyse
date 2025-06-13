@@ -98,7 +98,6 @@ const Login: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <Footer />
     </div>
   );
 };

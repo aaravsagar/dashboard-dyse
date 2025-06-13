@@ -11,11 +11,11 @@ dotenv.config();
 
 const app = express();
 const PORT = 3001;
-const FRONTEND_URL = 'https://dyse-dashboard.vercel.app';
+const FRONTEND_URL = 'http://localhost:5173';
 
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const REDIRECT_URI = 'https://dyse-dashboard.onrender.com/api/auth/callback';
+const REDIRECT_URI = 'http://localhost:3001/api/auth/callback';
 const BOT_TOKEN = process.env.DISCORD_TOKEN;
 
 // Initialize Firebase
@@ -40,9 +40,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true,
+    secure: false,
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: 'lax',
   },
 }));
 
@@ -228,5 +228,5 @@ app.put('/api/servers/:guildId/settings', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
 });

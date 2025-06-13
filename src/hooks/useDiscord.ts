@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Guild, Role, ServerSettings } from '../types';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'https://dyse-dashboard.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3001';
 
 export const useDiscord = () => {
   const [botGuilds, setBotGuilds] = useState<Guild[]>([]);

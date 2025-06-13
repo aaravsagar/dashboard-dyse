@@ -4,7 +4,6 @@ import { Guild, Role, ServerSettings as ServerSettingsType } from '../types';
 import { useDiscord } from '../hooks/useDiscord';
 import Toggle from './Toggle';
 import RoleSelector from './RoleSelector';
-import Footer from './Footer';
 
 interface ServerSettingsProps {
   guild: Guild;
@@ -188,8 +187,8 @@ const ServerSettings: React.FC<ServerSettingsProps> = ({ guild, onBack }) => {
             </h2>
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-white font-medium">Two-Step Verification(coming soon)</h3>
-                <p className="text-[#B9BBBE] text-sm">Require User To Complete Verification Before Bot Grants Role</p>
+                <h3 className="text-white font-medium">Two-Step Verification</h3>
+                <p className="text-[#B9BBBE] text-sm">Require additional verification for sensitive commands</p>
               </div>
               <Toggle
                 enabled={settings.twoStepVerification}
@@ -316,11 +315,7 @@ const ServerSettings: React.FC<ServerSettingsProps> = ({ guild, onBack }) => {
           </div>
         </div>
       </div>
-            <Footer />
     </div>
-    
-    
-    
   );
 };
 
