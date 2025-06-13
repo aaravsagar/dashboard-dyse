@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from './hooks/useAuth';
 import Header from './components/Header';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
 function App() {
-  const { user, loading } = useAuth();
+  const { user, loading, checkAuth } = useAuth();
+
+  useEffect(() => {
+    checkAuth(); // Recheck on mount (especially for production session sync)
+  }, []);
 
   if (loading) {
     return (
