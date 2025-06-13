@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { User } from '../types';
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'https://dyse-dashboard.onrender.com';
+const API_BASE_URL = 'https://dyse-dashboard.onrender.com';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -15,7 +14,9 @@ export const useAuth = () => {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get('/api/auth/me');
+      const response = await axios.get(`${API_BASE_URL}/api/auth/me`, {
+        withCredentials: true, // ✅ make sure cookies are sent
+      });
       setUser(response.data);
     } catch (error) {
       setUser(null);
@@ -25,12 +26,15 @@ export const useAuth = () => {
   };
 
   const login = () => {
-    window.location.href = 'https://dyse-dashboard.onrender.com/api/auth/login';
+    // Redirect to backend's login
+    window.location.href = `${API_BASE_URL}/api/auth/login`;
   };
 
   const logout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, {
+        withCredentials: true,
+      });
       setUser(null);
     } catch (error) {
       console.error('Logout failed:', error);
