@@ -3,7 +3,7 @@ import axios from 'axios';
 import { User } from '../types';
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = 'https://dyse-dashboard.onrender.com';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -25,7 +25,7 @@ export const useAuth = () => {
   };
 
   const login = () => {
-    window.location.href = 'http://localhost:3001/api/auth/login';
+    window.location.href = 'https://dyse-dashboard.onrender.com/api/auth/login';
   };
 
   const logout = async () => {

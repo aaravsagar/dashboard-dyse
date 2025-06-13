@@ -1,7 +1,6 @@
 import React from 'react';
 import { Shield, Settings, Users } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
-import Footer from '../components/Footer';
 
 const Login: React.FC = () => {
   const { login } = useAuth();
