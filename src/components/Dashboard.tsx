@@ -7,7 +7,7 @@ import ServerSettings from './ServerSettings';
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
-  const { botGuilds, loading, fetchBotGuilds, getInviteLink } = useDiscord();
+  const { botGuilds, loading, error, fetchBotGuilds, getInviteLink, clearError } = useDiscord();
   const [selectedGuild, setSelectedGuild] = useState<Guild | null>(null);
 
   useEffect(() => {
@@ -21,9 +21,13 @@ const Dashboard: React.FC = () => {
   };
 
   const handleInviteBot = async (guild: Guild) => {
-    const inviteUrl = await getInviteLink(guild.id);
-    if (inviteUrl) {
-      window.open(inviteUrl, '_blank');
+    try {
+      const inviteUrl = await getInviteLink(guild.id);
+      if (inviteUrl) {
+        window.open(inviteUrl, '_blank');
+      }
+    } catch (error) {
+      console.error('Failed to get invite link:', error);
     }
   };
 
@@ -52,6 +56,20 @@ const Dashboard: React.FC = () => {
             Manage your Discord bot settings across all your servers. You have admin access to {user?.guilds?.length || 0} servers.
           </p>
         </div>
+
+        {error && (
+          <div className="mb-6 bg-[#ED4245] bg-opacity-20 border border-[#ED4245] rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <p className="text-[#ED4245]">{error}</p>
+              <button
+                onClick={clearError}
+                className="text-[#ED4245] hover:bg-[#ED4245] hover:bg-opacity-20 p-1 rounded transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
